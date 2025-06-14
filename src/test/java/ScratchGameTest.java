@@ -5,7 +5,8 @@ import com.scratchgame.model.GameResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,14 @@ public class ScratchGameTest {
     @BeforeEach
     public void setUp() throws Exception {
         mapper = new ObjectMapper();
-        config = mapper.readValue(new File("config.json"), GameConfig.class);
+
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("config.json")) {
+            if (is == null) {
+                throw new FileNotFoundException("config.json not found in test resources");
+            }
+            config = mapper.readValue(is, GameConfig.class);
+            System.out.println("CONFIG: " + config);
+        }
     }
 
     @Test
