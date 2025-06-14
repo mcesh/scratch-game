@@ -41,7 +41,7 @@ mvn clean package
     ["A", "+1000", "B"],
     ["A", "A", "B"]
   ],
-  "reward": 6600,
+  "reward": 3600,
   "applied_winning_combinations": {
     "A": ["same_symbol_5_times", "same_symbols_vertically"],
     "B": ["same_symbol_3_times", "same_symbols_vertically"]
